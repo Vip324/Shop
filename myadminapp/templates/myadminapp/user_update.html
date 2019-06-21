@@ -1,0 +1,19 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+
+{% block menu %}
+{% endblock %}
+
+{% block container %}
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="form-control" type="submit" value="Save">
+    </form>
+    <a href="{% url 'myadmin:index' %}"
+       class="btn btn-primary form-control last">
+        Go to users
+    </a>
+
+{% endblock %}

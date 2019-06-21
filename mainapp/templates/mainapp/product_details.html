@@ -1,0 +1,79 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block container %}
+<div class="header-site">
+
+    {% include 'mainapp/include_block/inc__main_menu.html' %}
+
+    <div class='center__menu'>
+        {% include 'mainapp/include_block/inc__prod_type_menu.html' %}
+    </div>
+</div>
+
+
+
+<div class="details">
+
+    <div class="details-products">
+        <div class="details-slider">
+            <div class="slider-product">
+                <img src="/media/{{hot_product.image}}">
+            </div>
+            <div class="slider-control">
+                <div class="block">
+                    <a href="#"><img src="/media/{{hot_product.image}}" alt="">
+                        <div class="text"></div>
+                    </a>
+                </div>
+                <div class="block">
+                    <a href="#"><img src="/media/{{hot_product.image}}" alt="">
+                        <div class="text"></div>
+                    </a>
+                </div>
+                <div class="block">
+                    <a href="#"><img src="/media/{{hot_product.image}}" alt="">
+                        <div class="text"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="description">
+            <h3 class="big-bold">{{ hot_product.name }}</h3>
+            <h3 class="red">hot deal</h3>
+            <p class="price">{{ hot_product.price }} <span>rub</span></p>
+            <a href="{% url 'basket:add' hot_product.pk %}" class="red-button">
+                order <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+            <div class="description-text">
+                <p>{{ hot_product.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="treiding_pr">
+        <div class="treiding-product_header">
+            <h2 class="treiding_h2">The Same Products</h2>
+            <a href="#" class="featured_all">explore all <img src="/static/img/arrow.svg" alt="arrow"></a>
+        </div>
+
+        <div class="treiding_product_img">
+
+            {% for element in same_products %}
+            <div class="featured_product_block" style="background-image: url(/media/{{ element.image }})">
+                <div class="featured_product_text">
+                    <a href="#" class="button button_arrow"><img src="/static/img/arrow_2.svg" alt="arrow"></a>
+                    
+                    <h4 class="feature_h4">{{ element.name }}</h4>
+                    <p class="feature_p">{{ element.shot_desc }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+
+
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>My_Shop_1</title>
+    
+    {% block css %}
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	{% endblock %}
+	
+	{% block js %}
+	{% endblock %}
+</head>
+<body>
+	<div class="container">
+	
+		{% block container %}
+		{% endblock %}
+		
+		<div class="clr"></div>
+
+
+        <div class="fotter">
+            <div class="fotter_main">
+                <div class="fotter_contact">
+                    <h3 class="fotter_main_header">Contact Us</h3>
+                    <p class="fotter_main_p">132A Bridge Road Richmond VIC Australia.</p>
+                    <p class="fotter_main_p1">Talk to us on 1300 132</p>
+                    <a href="#" class="header_mail">info@interior.com</a>
+                </div>
+                <div class="fotter_usefull">
+                    <h3 class="fotter_main_header">Useful Information</h3>
+                    <div class="fotter_main_m">
+                        <ul class="fotter_main_menu">
+                            <li><a href="#" class="fotter_main_m_list">Sales terms</a></li>
+                            <li><a href="#" class="fotter_main_m_list">Customer care</a></li>
+                            <li><a href="#" class="fotter_main_m_list">Delivery</a></li>
+                        </ul>
+                        <ul class="fotter_main_menu">
+                            <li><a href="#" class="fotter_main_m_list">Architect accounts</a></li>
+                            <li><a href="#" class="fotter_main_m_list">Careers</a></li>
+                            <li><a href="#" class="fotter_main_m_list">Exchanges &amp;&nbsp;returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fotter_intouch">
+                    <h3 class="fotter_main_header">Let’s Stay in Touch!</h3>
+                    <p class="fotter_main_p">Suscribe to know about our latest news, products and special offers just for suscribers.</p>
+                    <div class="mail_fly">
+
+                        <input class="fotter_mail poss" type="email" placeholder="your email address ">
+
+                        <a href="#" class="butt_fly"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="foffer_fotter">
+                <p class="footer_p">© Copyright - INTERIOR 2016. All Rights Reserved.</p>
+                <div class="fotter_net">
+                    <a href="#" class="soch_net"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="soch_net"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="soch_net"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="soch_net"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+                <div>
+                    <a href="#" class="f_f_end">Terms &amp;&nbsp;Conditions</a> /
+                    <a href="#" class="f_f_end">Privacy policy &amp;&nbsp;Cookies</a>
+                </div>
+            </div>
+        </div>
+	
+	</div>
+</body>
+</html>

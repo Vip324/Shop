@@ -1,0 +1,57 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block container %}
+<div class="header-site">
+
+    {% include 'mainapp/include_block/inc__main_menu.html' %}
+
+    <div class='center__menu'>
+        {% include 'mainapp/include_block/inc__prod_type_menu.html' %}
+    </div>
+</div>
+
+
+
+<div class="details">
+
+    <div class="details-products">
+        <div class="details-slider">
+            <div class="slider-product">
+                <img src="/media/{{product.image}}">
+            </div>
+            <div class="slider-control">
+                <div class="block">
+                    <a href="#"><img src="/media/{{product.image}}" alt="">
+                        <div class="text"></div>
+                    </a>
+                </div>
+                <div class="block">
+                    <a href="#"><img src="/media/{{product.image}}" alt="">
+                        <div class="text"></div>
+                    </a>
+                </div>
+                <div class="block">
+                    <a href="#"><img src="/media/{{product.image}}" alt="">
+                        <div class="text"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="description">
+            <h3 class="big-bold">{{ product.name }}</h3>
+            <h3 class="big-bold"></h3>
+            <p class="price">{{ product.price }} <span>rub</span></p>
+            <a href="{% url 'basket:add' product.pk %}" class="red-button">
+                order <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+            <div class="description-text">
+                <p>{{ product.description }}</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

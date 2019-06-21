@@ -1,0 +1,24 @@
+<div class="featured-product_header">
+    <ul class="prod_menu">
+        <li>
+            <a href="{% url 'main:catalog' 0 %}" class="prod_m_style 
+               {% if request.resolver_match.kwargs.pk == '0' %}
+               prod_menu__link_active 
+               {% endif %}">
+                All
+            </a>
+        </li>
+        {% for item in catalog_menu %}
+        {% if item.is_active %}
+        <li>
+            <a href="{% url 'main:catalog' item.pk %}" class="prod_m_style
+               {% if request.resolver_match.kwargs.pk|add:0 == item.pk %}
+               prod_menu__link_active 
+               {% endif %}">
+                {{ item.name }}
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>

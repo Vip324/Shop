@@ -1,0 +1,112 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+{% block container %}
+
+<div class="top">
+    <div class="slider">
+        {% include 'mainapp/include_block/inc__main_menu.html' %}
+
+        <div class="slider__text padding-site">
+            <p class="slider__green">TRENDING</p>
+            <h2 class="slider__h2">Fishnet Chair</h2>
+            <p class="slider__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black. Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black.</p> <a href="#" class="button">Order Us <img src="/static/img/arrow.svg" alt="arrow"></a>
+        </div>
+        <div class="slider__pagination">
+            <a href="#" class="circle"></a>
+            <a href="#" class="circle circle_active"></a>
+            <a href="#" class="circle"></a>
+        </div>
+    </div>
+    <div class="featured_product">
+        <div class="featured-product_header">
+            <ul class="menu">
+                <li><a href="#" class="featured_m_style fea_menu__link_active">Featured</a></li>
+                <li><a href="#" class="featured_m_style">New</a></li>
+            </ul>
+            <a href="" class="featured_all">explore all <img src="/static/img/arrow.svg" alt="arrow"></a>
+        </div>
+        <div class="featur_prod_line">
+
+            {% for product in products %}
+            <div class="featured_product_block" style="background-image: url(/media/{{ product.image }})">
+                <div class="featured_product_text">
+                    <a href="#" class="button button_arrow"><img src="/static/img/arrow_2.svg" alt="arrow"></a>
+                    <h4 class="feature_h4">{{ product.category.name }}</h4>
+                    <h4 class="feature_h4">{{ product.name }}</h4>
+                    <p class="feature_p">{{ product.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+    <div class="promo">
+        <div class="promo_product prod_1">
+            <p class="promo__blue">exclusive</p>
+            <h2 class="promo__h2">Fishnet Chair</h2>
+            <p class="promo__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt
+                powder-coated black
+                or highly polished chrome.</p> <a href="#" class="button">Order Us <img src="/static/img/arrow.svg" alt="arrow"></a>
+        </div>
+        <div class="promo_product prod_2">
+            <p class="promo__blue">exclusive</p>
+            <h2 class="promo__h2">Fishnet Chair</h2>
+            <p class="promo__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black or highly polished chrome.</p> <a href="#" class="button">Order Us <img src="/static/img/arrow.svg" alt="arrow"></a>
+        </div>
+    </div>
+    <div class="treiding_product">
+        <div class="treiding-product_header">
+            <h2 class="treiding_h2">Trending Products</h2>
+            <a href="#" class="featured_all">explore all <img src="/static/img/arrow.svg" alt="arrow"></a>
+        </div>
+        <div class="treiding_product_img">
+            <a href="#" class="treiding_img"><img src="/static/img/product-11.jpg" alt="photo product"></a>
+            <a href="#" class="treiding_img"><img src="/static/img/product-21.jpg" alt="photo product"></a>
+            <a href="#" class="treiding_img"><img src="/static/img/product-31.jpg" alt="photo product"></a>
+            <a href="#" class="treiding_img"><img src="/static/img/product-41.jpg" alt="photo product"></a>
+            <a href="#" class="treiding_img"><img src="/static/img/product-51.jpg" alt="photo product"></a>
+            <a href="#" class="treiding_img"><img src="/static/img/product-61.jpg" alt="photo product"></a>
+        </div>
+    </div>
+    <div class="slider padding-site">
+        <div class="header">
+        </div>
+        <div class="slider__text">
+            <p class="slider__red">Hot deal</p>
+            <h2 class="slider__h2">Fishnet Chair</h2>
+            <p class="slider__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black</p> <a href="#" class="button">Order Us <img src="/static/img/arrow.svg" alt="arrow"></a>
+        </div>
+        <div class="slider__pagination">
+            <a href="#" class="circle"></a>
+            <a href="#" class="circle circle_active"></a>
+            <a href="#" class="circle"></a>
+        </div>
+    </div>
+    <div class="exlusive_product">
+        <div class="exlusive_main_img">
+            <p class="exlusive__blue">exclusive</p>
+            <h2 class="exlusive__h2">Fishnet Chair</h2>
+            <p class="exlusive__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black or highly polished chrome. </p> <a href="#" class="button butt_2">Order Us <img src="/static/img/arrow.svg" alt="arrow"></a>
+        </div>
+        <div class="exlusive_img">
+            <a href="#" class="exlusive_img_sm"><img src="/static/img/product-2-sm.jpg" alt="photo product"></a>
+            <a href="#" class="exlusive_img_sm"><img src="/static/img/product-3-sm.jpg" alt="photo product"></a>
+            <a href="#" class="exlusive_img_sm"><img src="/static/img/product-4-sm.jpg" alt="photo product"></a>
+            <a href="#" class="exlusive_img_sm"><img src="/static/img/product-5-sm.jpg" alt="photo product"></a>
+        </div>
+    </div>
+    <div class="phone_app">
+        <p class="phon__red">mobile app</p>
+        <h2 class="phon__h2">Find. Follow. Favorite. Discover brands on the go.</h2>
+        <p class="phon__p">Save your favorites and share your style.</p>
+        <div class="phon_button">
+            <a href="#" class="app_button"><img src="/static/img/app-store.svg" alt="arrow"></a>
+            <a href="#" class="app_button"><img src="/static/img/google-play.svg" alt="arrow"></a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

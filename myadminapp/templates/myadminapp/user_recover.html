@@ -1,0 +1,25 @@
+{% extends 'myadminapp/base.html' %}
+{% load static %}
+
+
+{% block menu %}
+{% endblock %}
+
+{% block container %}
+    <div class="user_delete">
+        Are you realy want to recover? <b>{{ user_to_recover.username }}
+        {% if user_to_recover.first_name %}
+            ({{ user_to_recover.first_name|title }}
+                {% if user_to_recover.last_name %}
+                    {{ user_to_recover.last_name|title }}
+                {% endif %})
+        {% endif %}</b>?
+        <form method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="Recover">
+        </form>
+        <a href="{% url 'myadmin:index' %}" class="btn btn-success">
+            Cancel
+        </a>
+    </div>
+{% endblock %}

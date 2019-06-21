@@ -1,0 +1,35 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+{% block container %}
+
+<div class="top">
+    <div class="header-site">
+
+        {% include 'mainapp/include_block/inc__main_menu.html' %}
+        <p class="header__p">Category: {{ category.name }}</p>
+    </div>
+    <div class="product_list">
+
+        {% include 'mainapp/include_block/inc__prod_type_menu.html' %}
+        
+        <div class="treiding_product_img">
+
+            {% for product in products %}
+            <div class="featured_product_block" style="background-image: url(/media/{{ product.image }})">
+                <div class="featured_product_text">
+                    <a href="{% url 'basket:add' product.pk %}" class="button button_arrow"><img src="/static/img/arrow_2.svg" alt="arrow"></a>
+
+                    <h4 class="feature_h4">{{ product.name }}</h4>
+                    <p class="feature_p">{{ product.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <a href="#" class="renew"><img src="/static/img/renew.png" alt="renew"></a>
+    </div>
+</div>
+
+{% endblock %}

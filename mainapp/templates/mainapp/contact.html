@@ -1,0 +1,36 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+{% block container %}
+
+<div class="top">
+    <div class="header-site">
+        {% include 'mainapp/include_block/inc__main_menu.html' %}
+
+        <p class="header__p">Contact Us</p>
+    </div>
+    <div class="main_contact">
+        {% if locations %}
+        {% for item in locations %}
+        <div class="cont_detael" style="background-image: url(/static/img/map_copy.png)">
+            <div class="cont_text">
+                <a href="#" class="cont_map_point"><img src="/static/img/map_point.png" alt="map point"></a>
+                <h3 class="cont_h4">{{ item.city }}</h3>
+                <p class="cont_p">Phone:</p>
+                <a href="#" class="cont_f_m">{{ item.phone }}</a>
+                <p class="cont_p">Email:</p>
+                <a href="#" class="cont_f_m">{{ item.email }}</a>
+                <p class="cont_p">Address </p>
+                <p class="cont_p1">{{ item.address }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h3>Страница в стадии разработки</h3>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
