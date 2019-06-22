@@ -2,9 +2,9 @@ from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 
-from myadminapp.forms import AdminShopUserCreateForm, AdminShopUserUpdateForm, AdminProductCategoryUpdateForm
+from myadminapp.forms import AdminShopUserCreateForm, AdminShopUserUpdateForm, AdminProductCategoryUpdateForm, AdminProductUpdateForm
 from authapp.models import ShopUser
-from mainapp.models import ProductCategory
+from mainapp.models import ProductCategory, Product
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -155,3 +155,51 @@ def productcategory_recover(request, pk):
         'obj_to_recover': obj}
 
     return render(request, 'myadminapp/category_recover.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def products(request, category_pk):
+    cat_obj = get_object_or_404(ProductCategory, pk=category_pk)
+    context = {
+        'title': 'Products',
+        'category': cat_obj,
+        'object_list': cat_obj.product_set.all()
+    }
+    return render(request, 'myadminapp/product_list.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def product_create(request, category_pk):
+    cat_obj = get_object_or_404(ProductCategory, pk=category_pk)
+    if request.method == 'POST':
+        form = AdminProductUpdateForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('myadmin:products',
+                                                kwargs={'category_pk': category_pk}))
+    else:
+        form = AdminProductUpdateForm(initial={'category': cat_obj})
+
+    context = {
+        'title': 'продукты/создание',
+        'form': form,
+        'category': cat_obj,
+    }
+    return render(request, 'myadminapp/product_update.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def product_update(request, pk):
+    obj = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        form = AdminProductUpdateForm(request.POST, request.FILES, instance=obj)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('myadmin:products',
+                                                kwargs={'category_pk': obj.category.pk}))
+    else:
+        form = AdminProductUpdateForm(instance=obj)
+
+    context = {
+        'title': 'product/edit',
+        'form': form,
+        'category': obj.category,
+    }
+    return render(request, 'myadminapp/product_update.html', context)
