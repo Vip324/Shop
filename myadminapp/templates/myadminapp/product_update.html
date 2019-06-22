@@ -9,11 +9,11 @@
         <form class="form-horizontal" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <input class="form-control" type="submit" value="сохранить">
+            <input class="form-control" type="submit" value="Save">
         </form>
         <a href="{% url 'myadmin:products' category.pk %}"
            class="btn btn-primary form-control last">
-            к списку продуктов
+            Go to Products
         </a>
     </div>
 {% endblock %}

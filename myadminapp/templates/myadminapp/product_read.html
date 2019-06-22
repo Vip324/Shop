@@ -1,0 +1,48 @@
+{% extends 'myadminapp/base.html' %}
+{% load static %}
+
+
+{% block container %}
+    <div class = "product_read">
+        <div class = "product_name">
+            Product<strong>{{ object.category.name|title }} / {{ object.name|title }}</strong>
+        </div>
+        <img src = "/media/{{ object.image|default:'products_images/default.jpg' }}" alt = "{{ object.name }}">
+        <div class = "summary">
+            <b>Price</b>
+            <p>{{ object.price }} руб</p>
+            <b>Qyantity</b>
+            <p>{{ object.quantity }}</p>
+            <b>in Catalog</b>
+            <p>{% if object.is_active %}Yes{% else %}No{% endif %}</p>
+            <p>
+            <button>
+                <a href = {% url 'myadminapp:product_update' object.pk %}>
+                Update
+                </a>
+            </button>
+            </p>
+            <p>
+            <button>
+                <a href = {% url 'myadminapp:product_delete' object.pk %}>
+                Delene
+                </a>
+            </button>
+            </p>
+            <p>
+            <button>
+                <a href = {% url 'myadminapp:products' object.category.pk %}>
+                Back
+                </a>
+            </button>
+            </p>
+         </div>
+         <div class = "product_desc" >
+            <b >Short description</b >
+            <p >{{ object.short_desc }}</p >
+            <br ><br >
+            <b >Full description</b >
+            <p >{{ object.description }}</p >
+         </div >
+    </div>
+{% endblock %}

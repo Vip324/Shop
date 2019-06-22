@@ -17,9 +17,9 @@
             {{ object.name|title }}
         </div>
         <div class="product_actions">
-            <a href="{#% url 'myadmin:product_read' object.pk %#}"
+            <a href="{% url 'myadmin:product_read' object.pk %}"
                class="btn btn-info">
-                подробнее
+                Details
             </a>
             <a href="{% url 'myadmin:product_update' object.pk %}"
                class="btn btn-success">
@@ -39,9 +39,9 @@
             {% endif %}
         </div>
         <div class="summary">
-            <b>цена</b>
+            <b>Price</b>
             <p>{{ object.price }} руб</p>
-            <b>количество</b>
+            <b>Quantity</b>
             <p>{{ object.quantity }}</p>
         </div>
         <div class="product_desc">

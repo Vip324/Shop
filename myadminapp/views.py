@@ -166,6 +166,13 @@ def products(request, category_pk):
     }
     return render(request, 'myadminapp/product_list.html', context)
 
+def product_read (request, pk):
+    content = {
+        'title' : 'product/details',
+        'object' : get_object_or_404(Product, pk=pk),
+    }
+    return render(request, 'myadminapp/product_read.html' , content)
+
 @user_passes_test(lambda u: u.is_superuser)
 def product_create(request, category_pk):
     cat_obj = get_object_or_404(ProductCategory, pk=category_pk)
