@@ -125,3 +125,33 @@ def productcategory_update(request, pk):
         'form': form
     }
     return render(request, 'myadminapp/productcategory_update.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def productcategory_delete(request, pk):
+    obj = get_object_or_404(ProductCategory, pk=pk)
+
+    if request.method == 'POST':
+        obj.is_active = False
+        obj.save()
+        return HttpResponseRedirect(reverse('myadmin:categories'))
+
+    context = {
+        'title': 'Category/Delete',
+        'obj_to_delete': obj}
+
+    return render(request, 'myadminapp/category_delete.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def productcategory_recover(request, pk):
+    obj = get_object_or_404(ProductCategory, pk=pk)
+
+    if request.method == 'POST':
+        obj.is_active = True
+        obj.save()
+        return HttpResponseRedirect(reverse('myadmin:categories'))
+
+    context = {
+        'title': 'Category/Recover',
+        'obj_to_recover': obj}
+
+    return render(request, 'myadminapp/category_recover.html', context)

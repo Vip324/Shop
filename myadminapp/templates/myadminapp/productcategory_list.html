@@ -22,10 +22,20 @@
                class="btn btn-success">
                 Update
             </a>
-            <a href="{#% url 'myadmin:category_delete' object.pk %#}"
-               class="btn btn-danger">
-                Delete
-            </a>
+
+            {% if object.is_active %}
+                <a href="{% url 'myadmin:productcategory_delete' object.pk %}"
+                   class="btn btn-danger">
+                    Delete
+                </a>
+            {% else %}
+                <a href="{% url 'myadmin:productcategory_recover' object.pk %}"
+                   class="btn btn-danger">
+                    Recover
+                </a>
+            {% endif %}
+
+
         </div>
         <div class="category_desc">
             {{ object.description }}
