@@ -13,6 +13,24 @@
             {% include 'mainapp/include_block/inc__prod_type_menu.html' %}
         </div>
     </div>
+
+    <div class="paginator">
+
+        {% if products.has_previous %}
+            <a href="{% url 'main:catalog_paginator' category.pk products.previous_page_number %}">
+                <
+            </a>
+        {% endif %}
+
+        <span class="current">страница {{ products.number }} из {{ products.paginator.num_pages }}</span>
+
+        {% if products.has_next %}
+            <a href="{% url 'main:catalog_paginator' category.pk products.next_page_number %}">
+                >
+            </a>
+        {% endif %}
+    </div>
+
     <div class="product_list">
 
         <div class="treiding_product_img">
