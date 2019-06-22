@@ -52,7 +52,7 @@ def product_details(request):
     return render(request, 'mainapp/product_details.html', context)
 
 def get_menu():
-    return ProductCategory.objects.all()
+    return ProductCategory.objects.filter(is_active=True)
 
 
 def catalog(request, pk):
