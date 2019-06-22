@@ -23,12 +23,20 @@
             </a>
             <a href="{% url 'myadmin:product_update' object.pk %}"
                class="btn btn-success">
-                редактировать
+                Update
             </a>
-            <a href="{#% url 'myadmin:product_delete' object.pk %#}"
-               class="btn btn-danger">
-                удалить
-            </a>
+
+            {% if object.is_active %}
+                <a href="{% url 'myadmin:product_delete' object.pk %}"
+                   class="btn btn-danger">
+                    Delete
+                </a>
+            {% else %}
+                <a href="{% url 'myadmin:product_recover' object.pk %}"
+                   class="btn btn-danger">
+                    Recover
+                </a>
+            {% endif %}
         </div>
         <div class="summary">
             <b>цена</b>
