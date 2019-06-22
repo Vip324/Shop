@@ -1,19 +1,29 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
+from django.views.generic.list import ListView
+from django.utils.decorators import method_decorator
+
 
 from myadminapp.forms import AdminShopUserCreateForm, AdminShopUserUpdateForm, AdminProductCategoryUpdateForm, AdminProductUpdateForm
 from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def index(request):
-    context = {
-        'title': 'Users',
-        'object_list': ShopUser.objects.all().order_by('-is_active', '-is_superuser')
-    }
-    return render(request, 'myadminapp/index.html', context)
+#@user_passes_test(lambda u: u.is_superuser)
+#def index(request):
+#    context = {
+#        'title': 'Users',
+#        'object_list': ShopUser.objects.all().order_by('-is_active', '-is_superuser')
+#    }
+#    return render(request, 'myadminapp/index.html', context)
+
+class UsersListView(ListView):
+    model = ShopUser
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch (self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 @user_passes_test(lambda u: u.is_superuser)

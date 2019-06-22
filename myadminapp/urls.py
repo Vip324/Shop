@@ -4,7 +4,9 @@ import myadminapp.views as myadminapp
 app_name = 'myadminapp'
 
 urlpatterns = [
-    re_path(r'^$', myadminapp.index, name='index'),
+    #re_path(r'^$', myadminapp.index, name='index'),
+    re_path(r'^$', myadminapp.UsersListView.as_view(), name='index'),
+
     re_path(r'^user/create/$', myadminapp.user_create, name='user_create'),
     re_path(r'^user/update/(?P<pk>\d+)/$', myadminapp.user_update, name='user_update'),
     re_path(r'^user/delete/(?P<pk>\d+)/$', myadminapp.user_delete, name='user_delete'),
