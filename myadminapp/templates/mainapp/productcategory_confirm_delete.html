@@ -7,7 +7,7 @@
 
 {% block container %}
     <div class="user_delete">
-        Are you realy want to delete? <b>{{ obj_to_delete }}</b>
+        Are you realy want to delete Category: <b>{{ object.name }} ?</b>
         <form method="post">
             {% csrf_token %}
             <input class="btn btn-danger" type="submit" value="Delete">
