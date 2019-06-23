@@ -14,7 +14,6 @@ urlpatterns = [
     re_path(r'^productcategory/create/$', myadminapp.ProductCategoryCreate.as_view(), name='productcategory_create'),
     re_path(r'^productcategory/update/(?P<pk>\d+)/$', myadminapp.ProductCategoryUpdate.as_view(), name='productcategory_update'),
     re_path(r'^productcategory/delet/(?P<pk>\d+)/$', myadminapp.ProductCategoryDelete.as_view(), name='productcategory_delete'),
-
     re_path(r'^productcategory/recover/(?P<pk>\d+)/$', myadminapp.productcategory_recover, name='productcategory_recover'),
 
     re_path(r'^products/(?P<category_pk>\d+)/$', myadminapp.products, name='products'),
