@@ -14,15 +14,15 @@ def index(request):
     context = {
        'page_title': 'main',
        'products': products,
-        'basket': get_basket(request),
+        #'basket': get_basket(request),
     }
     return render(request, 'mainapp/index.html', context)
 
-def get_basket(request):
-    if request.user.is_authenticated:
-        return request.user.basket.all()
-    else:
-        return []
+#def get_basket(request):
+#    if request.user.is_authenticated:
+#        return request.user.basket.all()
+#    else:
+#        return []
     
 def get_hot_product():
     return random.choice(Product.objects.all())
@@ -38,7 +38,7 @@ def products(request):
         'page_title': 'prod',
         'products': products,
         'catalog_menu': get_menu(),
-        'basket': get_basket(request),
+        #'basket': get_basket(request),
     }
     return render(request, 'mainapp/products.html', context)
 
@@ -50,7 +50,7 @@ def product_details(request):
         'page_title': 'prod',
         'products': products,
         'catalog_menu': get_menu(),
-        'basket': get_basket(request),
+        #'basket': get_basket(request),
         'hot_product': hot_product,
         'same_products': get_same_products(hot_product),
     }
@@ -86,7 +86,7 @@ def catalog(request, pk, page=1):
         'category': category,
         'products': products_paginator,
         'catalog_menu': get_menu(),
-        'basket': get_basket(request),
+        #'basket': get_basket(request),
     }
     return render(request, 'mainapp/products.html', context)
 
@@ -95,7 +95,7 @@ def product(request, pk):
         'page_title': 'product',
         'product': get_object_or_404(Product, pk=pk),
         'catalog_menu': get_menu(),
-        'basket': get_basket(request),
+        #'basket': get_basket(request),
     }
     return render(request, 'mainapp/product.html', context)
 
@@ -124,6 +124,6 @@ def contact(request):
     context = {
         'page_title': 'contact',
         'locations': locations,
-        'basket': get_basket(request),
+        #'basket': get_basket(request),
     }
     return render(request, 'mainapp/contact.html', context)
