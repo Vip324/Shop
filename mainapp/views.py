@@ -1,14 +1,19 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from mainapp.models import ProductCategory, Product
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
+from django.views.generic.list import ListView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import user_passes_test
+
 import random
+
+from mainapp.models import ProductCategory, Product
 
 def index(request):
     products = Product.objects.all()[:4]
-    
     context = {
-        'page_title': 'main',
-        'products': products,
+       'page_title': 'main',
+       'products': products,
         'basket': get_basket(request),
     }
     return render(request, 'mainapp/index.html', context)
@@ -52,10 +57,10 @@ def product_details(request):
     return render(request, 'mainapp/product_details.html', context)
 
 def get_menu():
-    return ProductCategory.objects.all()
+    return ProductCategory.objects.filter(is_active=True)
 
 
-def catalog(request, pk):
+def catalog(request, pk, page=1):
     if pk == '0':
         category = {
             'pk': 0,
@@ -66,11 +71,20 @@ def catalog(request, pk):
     else:
         category = get_object_or_404(ProductCategory, pk=pk)
         products = category.product_set.all()
+
+
+    paginator = Paginator(products, 2)
+    try :
+        products_paginator = paginator.page(page)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+    except EmptyPage:
+        products_paginator = paginator.page(paginator.num_pages)
     
     context = {
         'page_title': 'catalog',
         'category': category,
-        'products': products,
+        'products': products_paginator,
         'catalog_menu': get_menu(),
         'basket': get_basket(request),
     }

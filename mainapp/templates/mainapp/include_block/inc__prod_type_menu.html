@@ -9,16 +9,14 @@
             </a>
         </li>
         {% for item in catalog_menu %}
-        {% if item.is_active %}
-        <li>
-            <a href="{% url 'main:catalog' item.pk %}" class="prod_m_style
-               {% if request.resolver_match.kwargs.pk|add:0 == item.pk %}
-               prod_menu__link_active 
-               {% endif %}">
-                {{ item.name }}
-            </a>
-        </li>
-        {% endif %}
+            <li>
+                <a href="{% url 'main:catalog' item.pk %}" class="prod_m_style
+                 {% if request.resolver_match.kwargs.pk|add:0 == item.pk %}
+                 prod_menu__link_active
+                 {% endif %}">
+                 {{ item.name }}
+                 </a>
+            </li>
         {% endfor %}
     </ul>
 </div>

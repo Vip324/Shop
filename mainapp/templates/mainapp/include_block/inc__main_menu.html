@@ -3,14 +3,22 @@
     <ul class="menu">
         <li><a href="/" class="menu__link {% if request.resolver_match.url_name == 'index' %}menu__link_active{% endif %}">HOME</a></li>
         <li><a href="/product_details/" class="menu__link {% if request.resolver_match.url_name == 'product_details' or request.resolver_match.url_name == 'catalog' or request.resolver_match.url_name == 'product' %}menu__link_active{% endif %}">PRODUCTS</a></li>
+        <!--
         <li><a href="#" class="menu__link">HISTORY</a></li>
         <li><a href="#" class="menu__link">SHOWROOM</a></li>
+        -->
         <li><a href="/contact/" class="menu__link {% if request.resolver_match.url_name == 'contact' %}menu__link_active{% endif %}">CONTACT</a></li>
 
         {% if user.is_authenticated %}
         <li>
             <a href="{% url 'auth:edit' %}" class="menu__link menu__link_active">{{ user.first_name|default:'USER' }}</a>
         </li>
+        {% endif %}
+
+        {% if user.is_superuser %}
+            <li>
+                <a href="{% url 'myadminapp:index' %}" class="menu__link">ADMIN</a>
+            </li>
         {% endif %}
 
         <li>
