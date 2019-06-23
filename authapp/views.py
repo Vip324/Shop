@@ -1,7 +1,21 @@
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render, HttpResponseRedirect
 from authapp.forms import ShopUserLoginForm, ShopUserEditForm, ShopUserRegisterForm
 from django.contrib import auth
 from django.urls import reverse
+
+from authapp.models import ShopUser
+
+
+def send_verify_mail(user):
+    link = reverse('auth:verify', kwargs={'email': user.email, 'activation_key': user.activation_key})
+    title = f'Подтверждение учетной записи {user.username}'
+    message = f'Для подтверждения учетной записи {user.username} перейдите по ссылке: {settings.DOMAIN_NAME}{link} '
+
+    return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently= False )
+
+
 
 def login(request):
     next = request.GET['next'] if 'next' in request.GET.keys() else ''
@@ -35,8 +49,12 @@ def register(request):
     if request.method == 'POST':
         form = ShopUserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('auth:login'))
+            user = form.save()
+            if send_verify_mail(user):
+                print( 'E-mail was send!' )
+            else :
+                print( 'Error E-mail send' )
+            return HttpResponseRedirect(reverse('main:index'))
     else:
         form = ShopUserRegisterForm()
 
@@ -62,3 +80,19 @@ def edit(request):
     }
 
     return render(request, 'authapp/edit.html', content)
+
+def verify(request, email, activation_key):
+    try:
+        user = ShopUser.objects.get(email=email)
+        if user.activation_key == activation_key and not user.is_activation_key_expire():
+            user.is_active = True
+            user.save()
+            auth.login(request, user)
+            return render(request, 'authapp/verification.html')
+        else:
+            print( f'error activation user: {user} ' )
+            return render(request, 'authapp/verification.html')
+
+    except Exception as e:
+        print( f'error activation user : {e.args} ' )
+        return HttpResponseRedirect(reverse('main:index'))
