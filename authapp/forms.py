@@ -2,7 +2,7 @@ import hashlib
 import random
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from authapp.models import ShopUser
+from authapp.models import ShopUser, ShopUserProfile
 import django.forms as forms
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -67,3 +67,12 @@ class ShopUserEditForm(UserChangeForm):
             raise forms.ValidationError("You are too yuong!")
 
         return data
+class ShopUserProfileEditForm(forms.ModelForm):
+    class Meta :
+        model = ShopUserProfile
+        fields = ('tagline', 'aboutMe', 'gender')
+
+    def __init__(self, *args, **kwargs):
+        super(ShopUserProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'

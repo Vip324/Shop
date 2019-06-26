@@ -13,7 +13,11 @@
     <br>
     <input class="form-control" type="submit" value="ENTER">
 </form>
+
 <a href="{% url 'auth:register' %}" class="log_butt form-control btn-round btn">REGISTRATION</a>
+
+<a href="{% url 'social:begin' 'vk-oauth2' %}?next=/" class="log_butt form-control btn-round btn">LOGIN WITH VK</a>
+
 <a href="{% url 'main:index' %}" class="log_butt btn btn-round form-control">CANCEL</a>
 
 {% endblock %}
