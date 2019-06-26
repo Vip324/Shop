@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.mail import send_mail
+from django.db import transaction
 from django.shortcuts import render, HttpResponseRedirect
 from authapp.forms import ShopUserLoginForm, ShopUserEditForm, ShopUserRegisterForm, ShopUserProfileEditForm
 from django.contrib import auth
@@ -64,6 +65,7 @@ def register(request):
     }
     return render(request, 'authapp/register.html', content)
 
+@transaction.atomic
 def edit(request):
     if request.method == 'POST':
         form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)

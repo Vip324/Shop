@@ -19,8 +19,8 @@ class ShopUser(AbstractUser):
 
 class ShopUserProfile(models . Model):
     user = models.OneToOneField(ShopUser, unique=True, null=False, db_index=True, on_delete=models.CASCADE)
-    tagline = models.CharField(verbose_name = 'теги', max_length=128, blank=True)
-    aboutMe = models.TextField(verbose_name = 'о себе', max_length=512, blank=True)
+    tagline = models.CharField(verbose_name = 'Tagline', max_length=128, blank=True)
+    aboutMe = models.TextField(verbose_name = 'AboutMe', max_length=512, blank=True)
 
     MALE = 'M'
     FEMALE = 'W'
@@ -29,7 +29,7 @@ class ShopUserProfile(models . Model):
         ( MALE , 'М'),
         ( FEMALE , 'Ж'),
     )
-    gender = models.CharField(verbose_name ='пол', max_length=1, choices=GENDER_CHOICES, blank=True)
+    gender = models.CharField(verbose_name ='Sex', max_length=1, choices=GENDER_CHOICES, blank=True)
 
     @receiver(post_save, sender=ShopUser)
     def create_user_profile(sender, instance, created, ** kwargs):
