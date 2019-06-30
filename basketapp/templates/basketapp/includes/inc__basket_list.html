@@ -24,6 +24,11 @@
 <h4>Basket is empty</h4>
 {% endif %}
 
+
+<a href="{% url 'ordersapp:order_create' %}" class="btn btn-round">
+    Create order
+</a>
+
 <a href="{% url 'main:index' %}" class="btn btn-round">
     Go to MainPage
 </a>

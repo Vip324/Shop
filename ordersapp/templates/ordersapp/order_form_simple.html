@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <table class="table">
+                {{ orderitems.management_form }}
+                {% for form in orderitems.forms %}
+                    {{form.as_p}}
+                {% endfor %}
+            </table>
+            <button type="submit" value="save" class="btn btn-default btn-round form-control last">Save</button>
+            {% include 'ordersapp/includes/inc_order_actions.html' %}
+        </form>
+</body>
+</html>
