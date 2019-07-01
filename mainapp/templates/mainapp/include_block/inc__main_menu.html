@@ -11,7 +11,20 @@
 
         {% if user.is_authenticated %}
         <li>
-            <a href="{% url 'auth:edit' %}" class="menu__link menu__link_active">{{ user.first_name|default:'USER' }}</a>
+            <div class="dropdown">
+                <a href="" class="menu__link menu__link_active dropdown-toggle" data-toggle="dropdown">
+                    {{ user.first_name|default:'USER' }}
+                    <span class = "caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'auth:edit' %}">PROFILE</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'ordersapp:orders_list' %}">ORDER</a>
+                    </li>
+                </ul>
+            </div>
         </li>
         {% endif %}
 
