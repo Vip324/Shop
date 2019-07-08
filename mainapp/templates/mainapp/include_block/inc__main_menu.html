@@ -12,7 +12,7 @@
         {% if user.is_authenticated %}
         <li>
             <div class="dropdown">
-                <a href="" class="menu__link menu__link_active dropdown-toggle" data-toggle="dropdown">
+                <a href="" class="dropdown-toggle menu__link menu__link_active" data-toggle="dropdown">
                     {{ user.first_name|default:'USER' }}
                     <span class = "caret"></span>
                 </a>
