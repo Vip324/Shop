@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
+from django.utils.decorators import method_decorator
 
 from basketapp.models import Basket
 from mainapp.models import Product
@@ -19,6 +21,10 @@ class OrderList(ListView):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
+
+    @method_decorator(login_required())
+    def dispatch (self, *args, **kwargs):
+        return super(ListView, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         # пришел гет запрос
@@ -81,6 +87,12 @@ class OrderItemsCreate(CreateView):
     form_valid() # после валидации формы
     form_invalid() # если форма не валидна
     """
+    @method_decorator(login_required())
+    def dispatch (self, *args, **kwargs):
+        return super(CreateView, self).dispatch(*args, **kwargs)
+
+
+
 
     def get_context_data(self, **kwargs):
         """
@@ -175,7 +187,8 @@ class OrderItemsUpdate(UpdateView):
         if self.request.POST:
             data['orderitems'] = OrderFormSet(self.request.POST, instance=self.object)
         else:
-            formset = OrderFormSet(instance=self.object)
+            queryset = self.object.orderitems.select_related('product')
+            formset = OrderFormSet(instance=self.object, queryset=queryset)
             for form in formset.forms:
                 if form.instance.pk:
                     form.initial['price'] = form.instance.product.price

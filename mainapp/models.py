@@ -1,12 +1,10 @@
 from django.db import models
 
-from django.db import models
-
 class AktivManager(models.QuerySet):
     def get_queryset(self):
         return super().get_queryset().filter(is_active=True)
 
-class ProductCategory (models.Model):
+class ProductCategory(models.Model):
     object = models.manager
     active_objects = AktivManager
 
@@ -17,7 +15,7 @@ class ProductCategory (models.Model):
     def __str__ (self):
         return self.name
 
-class Product (models.Model):
+class Product(models.Model):
     object = models.manager
     active_objects = AktivManager
 
@@ -33,3 +31,9 @@ class Product (models.Model):
     def __str__ (self):
         # return f" {self.name} ( {self.category.name}, {self.quantity} )"
         return "{} ({})".format(self.name, self.category.name)
+
+
+    # @staticmethod
+    # def get_items():
+    #     return Product.objects.filter(is_active=True).order_by('category', 'name')
+

@@ -9,22 +9,25 @@ import random
 
 from mainapp.models import ProductCategory, Product
 
+
 def index(request):
-    products = Product.objects.all()[:2]
+    products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')[:4]
     context = {
-       'page_title': 'main',
-       'products': products,
+        'page_title': 'main',
+        'products': products,
     }
     return render(request, 'mainapp/index.html', context)
 
-#def get_basket(request):
+
+# def get_basket(request):
 #    if request.user.is_authenticated:
 #        return request.user.basket.all()
 #    else:
 #        return []
-    
+
 def get_hot_product():
     return random.choice(Product.objects.all())
+
 
 def get_same_products(hot_product):
     return hot_product.category.product_set.exclude(pk=hot_product.pk)
@@ -37,9 +40,10 @@ def products(request):
         'page_title': 'prod',
         'products': products,
         'catalog_menu': get_menu(),
-        #'basket': get_basket(request),
+        # 'basket': get_basket(request),
     }
     return render(request, 'mainapp/products.html', context)
+
 
 def product_details(request):
     products = Product.objects.all()
@@ -49,11 +53,12 @@ def product_details(request):
         'page_title': 'prod',
         'products': products,
         'catalog_menu': get_menu(),
-        #'basket': get_basket(request),
+        # 'basket': get_basket(request),
         'hot_product': hot_product,
         'same_products': get_same_products(hot_product),
     }
     return render(request, 'mainapp/product_details.html', context)
+
 
 def get_menu():
     return ProductCategory.objects.filter(is_active=True)
@@ -66,39 +71,39 @@ def catalog(request, pk, page=1):
             'name': 'All'
         }
         products = Product.objects.all()
-    
+
     else:
         category = get_object_or_404(ProductCategory, pk=pk)
         products = category.product_set.all()
 
-
     paginator = Paginator(products, 2)
-    try :
+    try:
         products_paginator = paginator.page(page)
     except PageNotAnInteger:
         products_paginator = paginator.page(1)
     except EmptyPage:
         products_paginator = paginator.page(paginator.num_pages)
-    
+
     context = {
         'page_title': 'catalog',
         'category': category,
         'products': products_paginator,
         'catalog_menu': get_menu(),
-        #'basket': get_basket(request),
+        # 'basket': get_basket(request),
     }
     return render(request, 'mainapp/products.html', context)
+
 
 def product(request, pk):
     context = {
         'page_title': 'product',
         'product': get_object_or_404(Product, pk=pk),
         'catalog_menu': get_menu(),
-        #'basket': get_basket(request),
+        # 'basket': get_basket(request),
     }
     return render(request, 'mainapp/product.html', context)
 
-       
+
 def contact(request):
     locations = [
         {
@@ -123,6 +128,6 @@ def contact(request):
     context = {
         'page_title': 'contact',
         'locations': locations,
-        #'basket': get_basket(request),
+        # 'basket': get_basket(request),
     }
     return render(request, 'mainapp/contact.html', context)
