@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IHF3ZXJ0eQ==?=
+From: django@geekshop.local
+To: qwerty@test.com
+Date: Mon, 08 Jul 2019 13:33:13 -0000
+Message-ID: <156259279302.9775.16512955865434090653@MacBook-Air-Ilya.local>
+
+Для подтверждения учетной записи перейдите по ссылке: http://localhost:8000/auth/verify/qwerty@test.com/5de9598d0aaf421b5a9aa5976f26ed02d0e9ac9f/
+-------------------------------------------------------------------------------

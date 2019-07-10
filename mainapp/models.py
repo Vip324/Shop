@@ -31,4 +31,5 @@ class Product (models.Model):
     is_active = models.BooleanField(verbose_name='activ status', default=True)
     
     def __str__ (self):
-        return f" {self.name} ( {self.category.name}, {self.quantity} )"
+        # return f" {self.name} ( {self.category.name}, {self.quantity} )"
+        return "{} ({})".format(self.name, self.category.name)

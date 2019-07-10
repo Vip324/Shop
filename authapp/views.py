@@ -11,8 +11,8 @@ from authapp.models import ShopUser
 
 def send_verify_mail(user):
     link = reverse('auth:verify', kwargs={'email': user.email, 'activation_key': user.activation_key})
-    title = f'Подтверждение учетной записи {user.username}'
-    message = f'Для подтверждения учетной записи {user.username} перейдите по ссылке: {settings.DOMAIN_NAME}{link} '
+    title = 'Подтверждение учетной записи {}'.format(user.username)
+    message = 'Для подтверждения учетной записи перейдите по ссылке: {}{}'.format(settings.DOMAIN_NAME, link)
 
     return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently= False )
 
@@ -95,9 +95,7 @@ def verify(request, email, activation_key):
             auth.login(request, user)
             return render(request, 'authapp/verification.html')
         else:
-            print( f'error activation user: {user} ' )
             return render(request, 'authapp/verification.html')
 
     except Exception as e:
-        print( f'error activation user : {e.args} ' )
         return HttpResponseRedirect(reverse('main:index'))

@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IGdvcmRlZXZpdg==?=
+From: django@geekshop.local
+To: gor17@gmail.com
+Date: Mon, 08 Jul 2019 20:11:19 -0000
+Message-ID: <156261667970.17074.4957921796251162150@MacBook-Air-Ilya.local>
+
+Для подтверждения учетной записи перейдите по ссылке: http://localhost:8000/auth/verify/gor17@gmail.com/49ea2d617f4ffdbd12b53b37813018b7114300eb/
+-------------------------------------------------------------------------------

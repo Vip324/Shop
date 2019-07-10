@@ -10,11 +10,10 @@ import random
 from mainapp.models import ProductCategory, Product
 
 def index(request):
-    products = Product.objects.all()[:4]
+    products = Product.objects.all()[:2]
     context = {
        'page_title': 'main',
        'products': products,
-        #'basket': get_basket(request),
     }
     return render(request, 'mainapp/index.html', context)
 

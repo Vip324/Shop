@@ -1,6 +1,8 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
 
 from basketapp.models import Basket
+from mainapp.models import Product
 from ordersapp.models import Order, OrderItem
 
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
@@ -208,3 +210,11 @@ def order_forming_complete(request, pk):
     order.save()
 
     return HttpResponseRedirect(reverse('ordersapp:orders_list'))
+
+def get_product_price(request, pk):
+    if request.is_ajax():
+        product = Product.objects.filter(pk=int(pk)).first()
+        if product:
+            return JsonResponse({'price': product.price})
+        else:
+            return JsonResponse({'price': 0})
