@@ -42,7 +42,7 @@ class Basket(models.Model):
         return sum([el.product_cost() for el in _items])
 
 
-    @cached_property
+
     @staticmethod
     def get_items(user):
         return Basket.objects.filter(user=user).order_by('product__category').select_related()
