@@ -42,17 +42,17 @@ class Basket(models.Model):
         return sum([el.product_cost() for el in _items])
 
 
-
-
-
+    @cached_property
     @staticmethod
     def get_items(user):
-        return Basket.objects.filter(user=user).order_by('product__category')
+        return Basket.objects.filter(user=user).order_by('product__category').select_related()
+
 
     @staticmethod
     def get_product(user, product):
-        return Basket.objects.filter(user=user, product=product) \
- \
+        return Basket.objects.filter(user=user, product=product).select_related()
+
+
     @classmethod
     def get_products_quantity(cls, user):
         basket_items = cls.get_items(user)
@@ -60,6 +60,7 @@ class Basket(models.Model):
         [basket_items_dic.update({item.product: item.quantity}) for item in basket_items]
 
         return basket_items_dic
+
 
     @staticmethod
     def get_item(pk):
