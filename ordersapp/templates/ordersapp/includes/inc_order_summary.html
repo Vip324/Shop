@@ -5,12 +5,14 @@
     <div class="h4">Update: {{ object.updated|date:"Y-m-d H:i:s" }}</div>
     <div class="h4">Statusс: {{ object.get_status_display }}</div>
     <hr>
-    <div class="h4">
-        Total quantity of goods: <span class="order_total_quantity">{{ object.get_total_quantity }}</span> ps.
-    </div>
-    <div class="h3">
-        Total cost: <span class="order_total_cost">{{ object.get_total_cost }}</span> rub
-    </div>
+    {% with object_summary=object.get_summary %}
+        <div class="h4">
+            Total quantity of goods: <span class="order_total_quantity">{{ object_summary.total_quantity }}</span> ps.
+        </div>
+        <div class="h3">
+            Total cost: <span class="order_total_cost">{{ object_summary.total_cost }}</span> rub
+        </div>
+    {% endwith %}
 {% else %}
     <div class="h2">New order</div>
     <hr>

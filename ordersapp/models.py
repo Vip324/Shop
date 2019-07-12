@@ -34,23 +34,24 @@ class Order(models.Model):
     def __str__(self):
         return 'Current order: {}'.format(self.id)
 
-    def get_total_quantity(self):
-        # Сколько всего количества товаров
+    def get_summary (self):
         items = self.orderitems.select_related()
-        # for item in items:
-        #     s+= item.quantity
-        return sum(list(map(lambda x: x.quantity, items)))
+        return {'total_quantity': sum(list(map(lambda x: x.quantity, items))), 'total_cost': sum(list(map(lambda x: x.quantity * x.product.price, items)))}
+
+    # def get_total_quantity(self):
+    #     # Сколько всего количества товаров
+    #     items = self.orderitems.select_related()
+    #     return sum(list(map(lambda x: x.quantity, items)))
 
     def get_product_type_quantity(self):
         # Скольо всего товаров
         items = self.orderitems.select_related()
-        # items = self.orderitems.count()
         return len(items)
 
-    def get_total_cost(self):
-        # Стоймость всех товаров
-        items = self.orderitems.select_related()
-        return sum(list(map(lambda x: x.quantity * x.product.price, items)))
+    # def get_total_cost(self):
+    #     # Стоймость всех товаров
+    #     items = self.orderitems.select_related()
+    #     return sum(list(map(lambda x: x.quantity * x.product.price, items)))
 
     # переопределяем метод, удаляющий объект
     def delete(self):
