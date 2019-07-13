@@ -4,65 +4,8 @@
 
 {% block container %}
 
-<div class="top">
-    <div class="header-site">
-
-        {% include 'mainapp/include_block/inc__main_menu.html' %}
-
-        <div class='center__menu'>
-            {% include 'mainapp/include_block/inc__prod_type_menu.html' %}
-        </div>
+    <div class="top">
+        {% include 'mainapp/include_block/inc_products_content.html' %}
     </div>
-
-    <div class="paginator">
-
-        {% if products.has_previous %}
-            <a href="{% url 'main:catalog_paginator' category.pk products.previous_page_number %}">
-                <
-            </a>
-        {% endif %}
-
-        <span class="current">страница {{ products.number }} из {{ products.paginator.num_pages }}</span>
-
-        {% if products.has_next %}
-            <a href="{% url 'main:catalog_paginator' category.pk products.next_page_number %}">
-                >
-            </a>
-        {% endif %}
-    </div>
-
-    <div class="product_list">
-
-        <div class="treiding_product_img">
-
-            {% for product in products %}
-            <div class="featured_product_block" style="background-image: url(/media/{{ product.image }})">
-                <div class="featured_product_text">
-                    <a href="{% url 'main:product' product.pk %}" class="button button_arrow"><img src="/static/img/arrow_2.svg" alt="arrow"></a>
-                    <h4 class="feature_h4">{{ product.category.name }}</h4>
-                    <h4 class="feature_h4">{{ product.name }}</h4>
-                    <p class="feature_p">{{ product.description }}</p>
-                </div>
-            </div>
-            {% endfor %}
-
-        </div>
-        <a href="#" class="renew"><img src="/static/img/renew.png" alt="renew"></a>
-    </div>
-    <div class="promo">
-        <div class="promo_product prod_1">
-            <p class="promo__blue">exclusive</p>
-            <h2 class="promo__h2">Fishnet Chair</h2>
-            <p class="promo__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt
-                powder-coated black
-                or highly polished chrome.</p> <a href="#" class="button">Order Us <img src="/static/img/arrow.svg" alt="arrow"></a>
-        </div>
-        <div class="promo_product prod_2">
-            <p class="promo__blue">exclusive</p>
-            <h2 class="promo__h2">Fishnet Chair</h2>
-            <p class="promo__p">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt powder-coated black or highly polished chrome.</p> <a href="#" class="button">Order Us <img src="/static/img/arrow.svg" alt="arrow"></a>
-        </div>
-    </div>
-</div>
 
 {% endblock %}
